@@ -1,0 +1,54 @@
+<p-dialog header="{{titulo}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: '80%'}" (onHide)="close()" [draggable]="false">
+
+  <form [formGroup]="measureForm">
+    <div class="form-group">
+      <label for="weight">Peso</label>
+      <input type="number" class="form-control" id="weight" formControlName="weight">
+    </div>
+
+    <div class="form-group">
+      <label for="waist">Cintura</label>
+      <input type="number" class="form-control" id="waist" formControlName="waist">
+    </div>
+
+    <div class="form-group">
+      <label for="biceps">Bíceps</label>
+      <input type="number" class="form-control" id="biceps" formControlName="biceps">
+    </div>
+
+    <div class="form-group">
+      <label for="leg">Pierna</label>
+      <input type="number" class="form-control" id="leg" formControlName="leg">
+    </div>
+
+    <div class="form-group">
+      <label for="chest">Pecho</label>
+      <input type="number" class="form-control" id="chest" formControlName="chest">
+    </div>
+
+    <div class="form-group">
+      <label for="gluteus">Glúteo</label>
+      <input type="number" class="form-control" id="gluteus" formControlName="gluteus">
+    </div>
+
+    <div class="form-group">
+      <label for="maxFrecueny">Frecuencia Máxima</label>
+      <input type="number" class="form-control" id="maxFrecueny" formControlName="maxFrecueny">
+    </div>
+
+    <div class="form-group">
+      <label for="minFrecuency">Frecuencia Mínima</label>
+      <input type="number" class="form-control" id="minFrecuency" formControlName="minFrecuency">
+    </div>
+  </form>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton class="ui-button-warning" icon="pi pi-times" (click)="close()"
+        label="Cancelar"></button>
+      <button type="button" pButton icon="pi pi-save" (click)="save()" label="Save"
+        [disabled]="measureForm.invalid"></button>
+    </div>
+  </p-footer>
+</p-dialog>

@@ -1,0 +1,67 @@
+<h1>Listado de clientes</h1>
+<!--MESSAGES CONTROLLER-->
+<p-messages [(value)]="messageService.msgs"></p-messages>
+
+<!--SEARCH IMPUT-->
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="searchBy" placeholder="Buscar..." [(ngModel)]="searchBy" (keydown.enter)="searchCustomer()">
+  <div class="input-group-append">
+    <button class="btn btn-outline-primary" type="button" (click)="searchCustomer()">Buscar</button>
+    <button class="btn btn-outline-warning" type="button" (click)="clearSearchCustomer()">Limpiar</button>
+  </div>
+</div>
+
+<!--CUSTOMER TOOLBAR-->
+<p-toolbar>
+  <div class="ui-toolbar-group-right">
+    <button pButton type="button" icon="pi pi-plus" (click)="showNewCustomer(null)"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-pencil"
+      (click)="showNewCustomer()" class="ui-button-warning"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-eye"
+      (click)="viewCustomer()" class="ui-button-success"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-trash"
+      (click)="deleteCustomer()" class="ui-button-danger"></button>
+  </div>
+</p-toolbar>
+
+<!-- DELETE CONFIRM DIALOG-->
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="No" class="ui-button-warning"
+      (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Sí" class="ui-button-success"
+      (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+
+<!-- CUSTOMER DATA TABLE-->
+<p-table [columns]="cols" [value]="customerService.customers" [responsive]="true" [paginator]="true" [rows]="10"
+  selectionMode="single" [(selection)]="customerService.selectedCustomer" dataKey="id"
+  (onRowSelect)="onRowSelect(event)">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+          ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+        </p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+<!-- ADD OR EDIT A CUSTOMER-->
+<div *ngIf="customerService.showNewCustomerDialog">
+  <app-new-customer></app-new-customer>
+</div>

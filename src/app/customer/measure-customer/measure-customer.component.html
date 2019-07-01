@@ -1,0 +1,36 @@
+<p-table [columns]="cols" [value]="customerService.selectedCustomer?.measures" [responsive]="true" [paginator]="true"
+  [rows]="5" selectionMode="single" [(selection)]="measureService.selectedMeasure" dataKey="id"
+  (onRowSelect)="onRowSelect(event)">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+          ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+        </p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+      <td>
+        <button pButton type="button" icon="pi pi-pencil" class="ui-button-warning" (click)="showNewMeasure(rowData.id)"></button>
+        <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+        <button pButton type="button" icon="pi pi-trash" class="ui-button-danger" (click)="deleteMeasure(rowData.id)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- DELETE CONFIRM DIALOG-->
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="No" class="ui-button-warning"
+      (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Sí" class="ui-button-success"
+      (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

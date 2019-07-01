@@ -1,0 +1,80 @@
+<button type="button" pButton class="ui-button-warning" icon="pi pi-arrow-left" (click)="back()"
+  label="Listado Clientes"></button>
+
+<!--MESSAGES CONTROLLER-->
+<p-messages [(value)]="messageService.msgs"></p-messages>
+<div class="row">
+  <div class="col-12 col-md-8 text-center">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="bg-info">
+          <td>
+            <font color="white">Información Personal</font>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="span-customer-info">Nombre</span>{{customerService.selectedCustomer?.name | titlecase }}
+            {{customerService.selectedCustomer?.lastname | titlecase }}</td>
+        </tr>
+        <tr>
+          <td><span class="span-customer-info">Teléfono</span>{{customerService.selectedCustomer?.phone}}</td>
+        </tr>
+        <tr>
+          <td><span class="span-customer-info">Email</span>{{customerService.selectedCustomer?.email}}</td>
+        </tr>
+        <tr>
+          <td><span class="span-customer-info">Observaciones</span>{{customerService.selectedCustomer?.observations}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    Acciones
+    <hr>
+    <div class="row no-gutters">
+      <button pButton type="button" class="btn btn-primary btn-block" label="Editar Datos" icon="pi pi-pencil"
+        (click)="showNewCustomer()"></button>
+      <button pButton type="button" class="btn btn-primary btn-block" label="Registrar Medidas" icon="pi pi-table"
+        (click)="showNewMeasure(null)"></button>
+      <!--<button pButton type="button" class="btn btn-primary btn-block" label="Adjuntar Entrenamiento"
+        icon="pi pi-bookmark"></button>
+      <button pButton type="button" class="btn btn-primary btn-block" label="Adjuntar Dieta"
+        icon="pi pi-upload"></button>
+      <button pButton type="button" class="btn btn-primary btn-block" label="Nueva Cita" icon="pi pi-calendar"></button>
+      -->
+    </div>
+  </div>
+</div>
+
+<!-- ADD OR EDIT A CUSTOMER-->
+<div *ngIf="customerService.showNewCustomerDialog">
+  <app-new-customer></app-new-customer>
+</div>
+
+<!-- ADD OR EDIT A CUSTOMER-->
+<div *ngIf="measureService.showNewMeasureDialog">
+  <app-new-measure></app-new-measure>
+</div>
+
+
+<!--TABS-->
+<p-tabView (onChange)="onTabChange($event)">
+  <p-tabPanel header="Medidas" [selected]="true">
+    <app-measure-customer></app-measure-customer>
+  </p-tabPanel>
+  <!--
+  <p-tabPanel header="Entrenamiento">
+
+  </p-tabPanel>
+  <p-tabPanel header="Dietas">
+
+  </p-tabPanel>
+  <p-tabPanel header="Citas">
+
+  </p-tabPanel>
+-->
+</p-tabView>

@@ -1,0 +1,87 @@
+<p-dialog header="{{titulo}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: '80%'}" (onHide)="close()" [draggable]="false">
+
+  <form [formGroup]="customerForm">
+    <div class="form-row">
+      <div class="col">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+          [ngClass]="{ 'is-invalid': customerForm.get('name').errors && customerForm.get('name').touched }">
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="lastname">Apellidos</label>
+          <input type="text" class="form-control" id="lastname" formControlName="lastname"
+            [ngClass]="{ 'is-invalid': customerForm.get('lastname').errors && customerForm.get('lastname').touched }">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="sex">Sexo</label>
+        <select id="sex" class="form-control" formControlName="sex">
+          <option value="Hombre" selected>Hombre</option>
+          <option value="Mujer">Mujer</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="height">Altura</label>
+          <input type="number" class="form-control" id="height" formControlName="height"
+            [ngClass]="{ 'is-invalid': customerForm.get('height').errors && customerForm.get('height').touched }">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="birthday">Fecha Nacimiento</label>
+        <input type="date" class="form-control" id="birthday" formControlName="birthday"
+          [ngClass]="{ 'is-invalid': customerForm.get('birthday').errors && customerForm.get('birthday').touched }">
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="city">Ciudad</label>
+          <input type="text" class="form-control" id="city" formControlName="city">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email"
+          [ngClass]="{ 'is-invalid': customerForm.get('email').errors && customerForm.get('email').touched }">
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="phone">Teléfono</label>
+          <input type="text" class="form-control" id="phone" formControlName="phone"
+            [ngClass]="{ 'is-invalid': customerForm.get('phone').errors && customerForm.get('phone').touched }">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="observations">Observaciones</label>
+        <textarea class="form-control" id="observations" formControlName="observations"></textarea>
+      </div>
+    </div>
+
+  </form>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton class="ui-button-warning" icon="pi pi-times" (click)="close()"
+        label="Cancelar"></button>
+      <button type="button" pButton icon="pi pi-save" (click)="save()" label="Save"
+      [disabled]="customerForm.invalid"></button>
+    </div>
+  </p-footer>
+</p-dialog>
