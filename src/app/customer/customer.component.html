@@ -40,7 +40,7 @@
 <!-- CUSTOMER DATA TABLE-->
 <p-table [columns]="cols" [value]="customerService.customers" [responsive]="true" [paginator]="true" [rows]="10"
   selectionMode="single" [(selection)]="customerService.selectedCustomer" dataKey="id"
-  (onRowSelect)="onRowSelect(event)">
+  (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">

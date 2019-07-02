@@ -1,6 +1,6 @@
-<p-table [columns]="cols" [value]="customerService.selectedCustomer?.measures" [responsive]="true" [paginator]="true"
+<p-table [columns]="measureService.measureCols" [value]="customerService.selectedCustomer?.measures" [responsive]="true" [paginator]="true"
   [rows]="5" selectionMode="single" [(selection)]="measureService.selectedMeasure" dataKey="id"
-  (onRowSelect)="onRowSelect(event)">
+  (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">

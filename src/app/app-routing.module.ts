@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'customerDate', component: CustomerDateComponent, canActivate: [AuthGuardService] },
   { path: 'customerProfile/:id', component: ProfileCustomerComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
-  { path: '**', component: LoginComponent }
+  { path: '**', component: LoginComponent, pathMatch: 'full', canActivate: [AuthGuardService] }
 
 ];
 

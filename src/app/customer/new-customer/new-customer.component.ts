@@ -20,6 +20,7 @@ export class NewCustomerComponent implements OnInit {
     public messageService: MessageService) { }
 
   ngOnInit() {
+    this.messageService.clearMessages();
     this.displayDialog = true;
     this.titulo = this.customerService.selectedCustomer == null ? 'Nuevo Cliente' : `Editar Cliente: ${this.customerService.selectedCustomer.name} ${this.customerService.selectedCustomer.lastname}`;
 

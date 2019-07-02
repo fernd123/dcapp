@@ -13,38 +13,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeasureCustomerComponent implements OnInit {
 
-  cols: any[];
-
   constructor(public customerService: CustomerService,
     public measureService: MeasureService,
     private confirmationService: ConfirmationService,
     public messageService: MessageService) { }
 
   ngOnInit() {
-
-    setTimeout(() => {
-      debugger;
-    if (this.customerService.selectedCustomer.sex == 'Hombre') {
-      this.cols = [
-        { field: 'createAt', header: 'Fecha' },
-        { field: 'weight', header: 'Peso (kg)' },
-        { field: 'waist', header: 'Cintura (cm)' },
-        { field: 'biceps', header: 'Biceps (cm)' },
-        { field: 'leg', header: 'Pierna (cm)' },
-        { field: 'chest', header: 'Pecho (cm)' },
-      ];
-    }else if (this.customerService.selectedCustomer.sex == 'Mujer') {
-      this.cols = [
-        { field: 'createAt', header: 'Fecha' },
-        { field: 'weight', header: 'Peso (kg)' },
-        { field: 'waist', header: 'Cintura (cm)' },
-        { field: 'biceps', header: 'Biceps (cm)' },
-        { field: 'leg', header: 'Pierna (cm)' },
-        { field: 'chest', header: 'Pecho (cm)' },
-        { field: 'gluteus', header: 'Glúteo (cm)' }
-      ];
-    }
-    }, 200);
+    this.messageService.clearMessages();
     /*
     this.cols = [
       { field: 'createAt', header: 'Fecha' },
@@ -58,8 +33,6 @@ export class MeasureCustomerComponent implements OnInit {
       { field: 'minFrecuency', header: 'Frec. Mínima' }
     ];
     */
-
-    
   }
 
   onRowSelect(event) {

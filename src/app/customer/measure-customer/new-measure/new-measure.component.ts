@@ -24,6 +24,7 @@ export class NewMeasureComponent implements OnInit {
     public messageService: MessageService) { }
 
   ngOnInit() {
+    this.messageService.clearMessages();
     this.displayDialog = true;
     this.titulo = this.measureService.selectedMeasure == null ? 'Nueva Medida' : `Editar Medida: ${this.customerService.selectedCustomer.name} ${this.customerService.selectedCustomer.lastname}`;
 

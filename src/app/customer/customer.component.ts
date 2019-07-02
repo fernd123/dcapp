@@ -18,7 +18,7 @@ export class CustomerComponent implements OnInit {
 
   newCustomer: boolean = false;
 
-  constructor(private customerService: CustomerService,
+  constructor(public customerService: CustomerService,
     private router: Router,
     private confirmationService: ConfirmationService,
     public messageService: MessageService) { }
@@ -78,7 +78,7 @@ export class CustomerComponent implements OnInit {
     this.searchCustomer();
   }
 
-  onRowSelect(event) {
+  public onRowSelect(event) {
     console.log(this.customerService.selectedCustomer);
   }
 }

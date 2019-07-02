@@ -12,7 +12,10 @@ export class CustomerService {
   showNewCustomerDialog: boolean = false;
   token: string = "";
 
-  private uriEndPoint: string = 'http://localhost:8080/api/customers';
+  //private uriEndPoint: string = 'http://localhost:8080/api/customers';
+  //private uriEndPoint: string = '/api/customers';
+  private uriEndPoint: string = 'https://spring-dcnutrition.herokuapp.com/api/customers';
+
   constructor(private http: HttpClient) { }
 
   getCustomers() {

@@ -13,4 +13,8 @@ export class MessageService {
     this.msgs.push({ severity: severity, summary: summary, detail: detail });
   }
 
+  clearMessages(){
+    this.msgs = [];
+  }
+
 }

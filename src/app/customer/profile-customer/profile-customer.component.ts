@@ -21,11 +21,34 @@ export class ProfileCustomerComponent implements OnInit {
     private _location: Location) { }
 
   ngOnInit() {
+    this.messageService.clearMessages();
     this.activatedRoute.params.subscribe(params => {
       debugger;
       let id = params['id'];
       this.customerService.getCustomerById(id).subscribe(
-        ((res: Customer) => this.customerService.selectedCustomer = res),
+        ((res: Customer) => {
+          this.customerService.selectedCustomer = res;
+          if (this.customerService.selectedCustomer.sex == 'Hombre') {
+            this.measureService.measureCols = [
+              { field: 'createAt', header: 'Fecha' },
+              { field: 'weight', header: 'Peso (kg)' },
+              { field: 'waist', header: 'Cintura (cm)' },
+              { field: 'biceps', header: 'Biceps (cm)' },
+              { field: 'leg', header: 'Pierna (cm)' },
+              { field: 'chest', header: 'Pecho (cm)' },
+            ];
+          } else if (this.customerService.selectedCustomer.sex == 'Mujer') {
+            this.measureService.measureCols = [
+              { field: 'createAt', header: 'Fecha' },
+              { field: 'weight', header: 'Peso (kg)' },
+              { field: 'waist', header: 'Cintura (cm)' },
+              { field: 'biceps', header: 'Biceps (cm)' },
+              { field: 'leg', header: 'Pierna (cm)' },
+              { field: 'chest', header: 'Pecho (cm)' },
+              { field: 'gluteus', header: 'Glúteo (cm)' }
+            ];
+          }
+        }),
         (error => console.log(error))
       );
     });
