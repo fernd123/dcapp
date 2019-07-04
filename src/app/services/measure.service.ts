@@ -13,9 +13,7 @@ export class MeasureService {
 
   measureCols = [];
 
-  //private uriEndPoint: string = 'http://localhost:8080/api/measures';
-  //private uriEndPoint: string = '/api/measures';
-  private uriEndPoint: string = 'https://spring-dcnutrition.herokuapp.com/api/measures';
+  private uriEndPoint: string = 'http://localhost:8080/api/measures';
 
   constructor(private http: HttpClient,
     private customerService: CustomerService) { }

@@ -9,8 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  //private uriEndPoint: string = 'http://localhost:8080/login';
-  private uriEndPoint: string = 'https://spring-dcnutrition.herokuapp.com/login';
+  private uriEndPoint: string = 'http://localhost:8080/login';
 
   constructor(private http: HttpClient,
     private router: Router,
