@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Customer } from '../shared/models/customer';
-import { Message, MessageService } from 'primeng/api';
-import { map } from 'rxjs/operators';
+import { Globals } from './globals';
+
 
 @Injectable()
 export class CustomerService {
@@ -12,7 +12,7 @@ export class CustomerService {
   showNewCustomerDialog: boolean = false;
   token: string = "";
 
-  private uriEndPoint: string = 'http://localhost:8080/api/customers';
+  private uriEndPoint: string = Globals.URL_ENDPOINT_HEROKU+Globals.URL_CUSTOMERS;
 
   constructor(private http: HttpClient) { }
 

@@ -18,8 +18,8 @@ export class NewMeasureComponent implements OnInit {
   measureForm: FormGroup;
 
 
-  constructor(private customerService: CustomerService,
-    private measureService: MeasureService,
+  constructor(public customerService: CustomerService,
+    public measureService: MeasureService,
     private formBuilder: FormBuilder,
     public messageService: MessageService) { }
 

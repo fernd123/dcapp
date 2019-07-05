@@ -23,7 +23,6 @@ export class ProfileCustomerComponent implements OnInit {
   ngOnInit() {
     this.messageService.clearMessages();
     this.activatedRoute.params.subscribe(params => {
-      debugger;
       let id = params['id'];
       this.customerService.getCustomerById(id).subscribe(
         ((res: Customer) => {
@@ -73,6 +72,7 @@ export class ProfileCustomerComponent implements OnInit {
   }
 
   back() {
+    this.messageService.clearMessages();
     this._location.back();
   }
 

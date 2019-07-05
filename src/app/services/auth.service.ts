@@ -1,3 +1,4 @@
+import { Globals } from './globals';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../shared/models/user';
@@ -9,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  private uriEndPoint: string = 'http://localhost:8080/login';
+  private uriEndPoint: string = Globals.URL_ENDPOINT_HEROKU+Globals.URL_LOGIN;
 
   constructor(private http: HttpClient,
     private router: Router,

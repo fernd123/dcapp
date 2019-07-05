@@ -1,3 +1,4 @@
+import { Globals } from './globals';
 import { HttpClient } from '@angular/common/http';
 import { Measure } from './../shared/models/measure';
 import { Injectable } from '@angular/core';
@@ -13,7 +14,7 @@ export class MeasureService {
 
   measureCols = [];
 
-  private uriEndPoint: string = 'http://localhost:8080/api/measures';
+  private uriEndPoint: string = Globals.URL_ENDPOINT_HEROKU+Globals.URL_MEASURES;
 
   constructor(private http: HttpClient,
     private customerService: CustomerService) { }
