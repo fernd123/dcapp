@@ -4,28 +4,18 @@
 
 <!--SEARCH IMPUT-->
 <div class="input-group mb-3">
-  <input type="text" class="form-control" id="searchBy" placeholder="Buscar..." [(ngModel)]="searchBy" (keydown.enter)="searchCustomer()">
+  <input type="text" class="form-control" id="searchBy" placeholder="Buscar..." [(ngModel)]="searchBy"
+    (keydown.enter)="searchCustomer()">
   <div class="input-group-append">
     <button class="btn btn-outline-primary" type="button" (click)="searchCustomer()">Buscar</button>
     <button class="btn btn-outline-warning" type="button" (click)="clearSearchCustomer()">Limpiar</button>
   </div>
 </div>
 
-<!--CUSTOMER TOOLBAR-->
-<p-toolbar>
-  <div class="ui-toolbar-group-right">
-    <button pButton type="button" icon="pi pi-plus" (click)="showNewCustomer(null)"></button>
-    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
-    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-pencil"
-      (click)="showNewCustomer()" class="ui-button-warning"></button>
-    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
-    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-eye"
-      (click)="viewCustomer()" class="ui-button-success"></button>
-    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
-    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-trash"
-      (click)="deleteCustomer()" class="ui-button-danger"></button>
-  </div>
-</p-toolbar>
+<div *ngIf="isLoading == true">
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s">
+  </p-progressSpinner>
+</div>
 
 <!-- DELETE CONFIRM DIALOG-->
 <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
@@ -36,6 +26,27 @@
       (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>
+
+<!-- ADD OR EDIT A CUSTOMER-->
+<div *ngIf="customerService.showNewCustomerDialog">
+  <app-new-customer></app-new-customer>
+</div>
+
+<!--CUSTOMER TOOLBAR-->
+<p-toolbar>
+  <div class="ui-toolbar-group-right">
+    <button pButton type="button" icon="pi pi-plus" (click)="showNewCustomer(null)" title="Nuevo Cliente"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-pencil"
+      (click)="showNewCustomer()" title="Editar Datos Cliente" class="ui-button-warning"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-eye"
+      (click)="viewCustomer()" title="Ficha Cliente" class="ui-button-success"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-trash"
+      (click)="deleteCustomer()" title="Eliminar Cliente" class="ui-button-danger"></button>
+  </div>
+</p-toolbar>
 
 <!-- CUSTOMER DATA TABLE-->
 <p-table [columns]="cols" [value]="customerService.customers" [responsive]="true" [paginator]="true" [rows]="10"
@@ -54,14 +65,13 @@
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
       <td *ngFor="let col of columns">
-        {{rowData[col.field]}}
+        <div *ngIf="col.field == 'birthday'">
+          {{rowData[col.field] | age}}
+        </div>
+        <div *ngIf="col.field != 'birthday'">
+          {{rowData[col.field]}}
+        </div>
       </td>
     </tr>
   </ng-template>
 </p-table>
-
-
-<!-- ADD OR EDIT A CUSTOMER-->
-<div *ngIf="customerService.showNewCustomerDialog">
-  <app-new-customer></app-new-customer>
-</div>

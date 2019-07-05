@@ -1,5 +1,11 @@
-<button type="button" pButton class="ui-button-warning" icon="pi pi-arrow-left" (click)="back()"
+<button type="button" pButton class="ui-button-warning margin-bottom" icon="pi pi-arrow-left" (click)="back()"
   label="Listado Clientes"></button>
+
+<!-- LOADING SPINNER -->
+<div *ngIf="isLoading == true">
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s">
+  </p-progressSpinner>
+</div>
 
 <!--MESSAGES CONTROLLER-->
 <p-messages [(value)]="messageService.msgs"></p-messages>

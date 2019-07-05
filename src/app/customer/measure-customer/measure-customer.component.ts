@@ -1,3 +1,4 @@
+import { Parent } from './../../shared/models/parent';
 import { Measure } from './../../shared/models/measure';
 import { Customer } from './../../shared/models/customer';
 import { MessageService } from './../../services/message.service';
@@ -5,18 +6,19 @@ import { ConfirmationService } from 'primeng/api';
 import { MeasureService } from './../../services/measure.service';
 import { CustomerService } from './../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
+import { Globals } from 'src/app/services/globals';
 
 @Component({
   selector: 'app-measure-customer',
   templateUrl: './measure-customer.component.html',
   styleUrls: ['./measure-customer.component.css']
 })
-export class MeasureCustomerComponent implements OnInit {
+export class MeasureCustomerComponent extends Parent implements OnInit {
 
   constructor(public customerService: CustomerService,
     public measureService: MeasureService,
     private confirmationService: ConfirmationService,
-    public messageService: MessageService) { }
+    public messageService: MessageService) { super(); }
 
   ngOnInit() {
     this.messageService.clearMessages();
@@ -58,7 +60,7 @@ export class MeasureCustomerComponent implements OnInit {
       });
 
     this.confirmationService.confirm({
-      header: 'Confirmación',
+      header: Globals.CONFIRMATION,
       message: `¿Estás seguro que deseas borrar la medida del cliente <b>${this.customerService.selectedCustomer.name} ${this.customerService.selectedCustomer.lastname}</b>?`,
       accept: () => {
         this.measureService.deleteMeasure(this.measureService.selectedMeasure).subscribe(
@@ -67,9 +69,9 @@ export class MeasureCustomerComponent implements OnInit {
             this.customerService.getCustomerById(this.customerService.selectedCustomer.id).subscribe(
               ((res: Customer) => this.customerService.selectedCustomer = res)
             )
-            this.messageService.setMessage('success', 'Éxito', 'Medida eliminada correctamente');
+            this.messageService.setMessage(Globals.SUCCESS_TYPE, Globals.SUCCESS, Globals.MEASURE_REMOVED);
           }),
-          (error => this.messageService.setMessage('error', 'Error', error))
+          (error => this.messageService.setMessage(Globals.ERROR_TYPE, Globals.ERROR, error))
         );
       }
     });

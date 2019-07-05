@@ -1,2 +1,9 @@
 /* You can add global styles to this file, and also import other style files 
  // --proxy-config proxy.conf.json*/
+label {
+  font-weight: bold;
+}
+
+.margin-bottom {
+  padding-bottom: 20px;
+}

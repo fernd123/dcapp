@@ -2,45 +2,67 @@
   [style]="{width: '80%'}" (onHide)="close()" [draggable]="false">
 
   <form [formGroup]="measureForm">
-    <div class="form-group">
-      <label for="weight">Peso</label>
-      <input type="number" class="form-control" id="weight" formControlName="weight">
-    </div>
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="weight">Peso (kg) </label>
+          <input type="number" class="form-control" id="weight" formControlName="weight">
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label for="waist">Cintura</label>
-      <input type="number" class="form-control" id="waist" formControlName="waist">
-    </div>
-
-    <div class="form-group">
-      <label for="biceps">Bíceps</label>
-      <input type="number" class="form-control" id="biceps" formControlName="biceps">
-    </div>
-
-    <div class="form-group">
-      <label for="leg">Pierna</label>
-      <input type="number" class="form-control" id="leg" formControlName="leg">
-    </div>
-
-    <div class="form-group">
-      <label for="chest">Pecho</label>
-      <input type="number" class="form-control" id="chest" formControlName="chest">
-    </div>
-
-    <div class="form-group" *ngIf="customerService.selectedCustomer.sex == 'Mujer'">
-      <label for="gluteus">Glúteo</label>
-      <input type="number" class="form-control" id="gluteus" formControlName="gluteus">
+      <div class="col">
+        <div class="form-group">
+          <label for="waist">Cintura (cm)</label>
+          <input type="number" class="form-control" id="waist" formControlName="waist">
+        </div>
+      </div>
     </div>
 
     <div class="form-row">
       <div class="col">
-        <label for="maxFrecueny">Frecuencia Máxima</label>
-        <input type="number" class="form-control" id="maxFrecueny" formControlName="maxFrecueny">
+        <div class="form-group">
+          <label for="biceps">Bíceps (cm)</label>
+          <input type="number" class="form-control" id="biceps" formControlName="biceps">
+        </div>
       </div>
 
       <div class="col">
-        <label for="minFrecuency">Frecuencia Mínima</label>
-        <input type="number" class="form-control" id="minFrecuency" formControlName="minFrecuency">
+        <div class="form-group">
+          <label for="leg">Pierna (cm)</label>
+          <input type="number" class="form-control" id="leg" formControlName="leg">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="chest">Pecho (cm)</label>
+          <input type="number" class="form-control" id="chest" formControlName="chest">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group" *ngIf="customerService.selectedCustomer.sex == 'Mujer'">
+          <label for="gluteus">Glúteo (cm)</label>
+          <input type="number" class="form-control" id="gluteus" formControlName="gluteus">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="maxFrecueny">Frecuencia Máxima</label>
+          <input type="number" class="form-control" id="maxFrecueny" formControlName="maxFrecueny">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="minFrecuency">Frecuencia Mínima</label>
+          <input type="number" class="form-control" id="minFrecuency" formControlName="minFrecuency">
+        </div>
       </div>
     </div>
 
@@ -50,8 +72,15 @@
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button type="button" pButton class="ui-button-warning" icon="pi pi-times" (click)="close()"
         label="Cancelar"></button>
-      <button type="button" pButton icon="pi pi-save" (click)="save()" label="Save"
-        [disabled]="measureForm.invalid"></button>
+      <button type="button" pButton icon="pi pi-save" (click)="save()" label="Guardar" [disabled]="measureForm.invalid">
+      </button>
+    </div>
+
+    <!-- LOADING SPINNER -->
+    <div *ngIf="isLoading == true">
+      <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE"
+        animationDuration=".5s">
+      </p-progressSpinner>
     </div>
   </p-footer>
 </p-dialog>

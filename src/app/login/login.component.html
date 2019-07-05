@@ -27,17 +27,18 @@
 
     <!-- Icon -->
     <div class="fadeIn first padding20" >
-      <img src="../../assets/images/logodc.png" id="icon" alt="User Icon" />
+      <img src="../../assets/images/logodc.png" id="icon" alt="Company Icon" />
     </div>
 
     <!-- Login Form -->
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
       <input [ngClass]="{ 'has-error': f.submitted && !username.valid }" type="text" id="login" class="fadeIn second"
         placeholder="Usuario" [(ngModel)]="model.username" name="username" #username="ngModel" required>
-      <input type="text" id="password" class="fadeIn third" name="password" placeholder="Contraseña" name="password"
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña" name="password"
         [(ngModel)]="model.password" #password="ngModel" required>
       <small *ngIf="error" id="error" class="form-text" style="color: red">Usuario y/o Contraseña incorrecto</small>
       <input type="submit" class="fadeIn fourth" value="Entrar">
+      <i *ngIf="isLoading == true" class="pi pi-spin pi-spinner"></i>
     </form>
 
     <!-- Remind Passowrd 

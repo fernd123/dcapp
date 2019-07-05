@@ -1,4 +1,4 @@
-import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
@@ -19,6 +19,7 @@ import { CustomerDateComponent } from './customer-date/customer-date.component';
 import { ProfileCustomerComponent } from './customer/profile-customer/profile-customer.component';
 import { MeasureCustomerComponent } from './customer/measure-customer/measure-customer.component';
 import { NewMeasureComponent } from './customer/measure-customer/new-measure/new-measure.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 
 //Services
@@ -43,6 +44,9 @@ import {MessageModule} from 'primeng/message';
 import {PanelModule} from 'primeng/panel';
 import {TabViewModule} from 'primeng/tabview';
 import { LoginComponent } from './login/login.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AgePipe } from './age.pipe';
+
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -58,7 +62,9 @@ export function tokenGetter() {
     ProfileCustomerComponent,
     MeasureCustomerComponent,
     NewMeasureComponent,
-    LoginComponent
+    LoginComponent,
+    FooterComponent,
+    AgePipe
   ],
   imports: [
     BrowserModule,
@@ -78,6 +84,7 @@ export function tokenGetter() {
     ButtonModule,
     SidebarModule,
     DialogModule,
+    ProgressSpinnerModule,
     CalendarModule,
     ConfirmDialogModule,
     MessagesModule,

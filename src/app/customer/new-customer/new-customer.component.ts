@@ -1,26 +1,28 @@
+import { Globals } from './../../services/globals';
+import { Router } from '@angular/router';
+import { Parent } from './../../shared/models/parent';
 import { MessageService } from './../../services/message.service';
 import { Customer } from './../../shared/models/customer';
 import { CustomerService } from './../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Glob } from 'glob';
 
 @Component({
   selector: 'app-new-customer',
   templateUrl: './new-customer.component.html'
 })
-export class NewCustomerComponent implements OnInit {
-  displayDialog: boolean;
-  cols: any[];
+export class NewCustomerComponent extends Parent implements OnInit {
   customerForm: FormGroup;
-  titulo: string;
-
+  displayDialog = false;
 
   constructor(private customerService: CustomerService,
     private formBuilder: FormBuilder,
-    public messageService: MessageService) { }
+    private router: Router,
+    public messageService: MessageService) { super(); }
 
   ngOnInit() {
-    this.messageService.clearMessages();
+    //this.messageService.clearMessages();
     this.displayDialog = true;
     this.titulo = this.customerService.selectedCustomer == null ? 'Nuevo Cliente' : `Editar Cliente: ${this.customerService.selectedCustomer.name} ${this.customerService.selectedCustomer.lastname}`;
 
@@ -47,29 +49,35 @@ export class NewCustomerComponent implements OnInit {
   }
 
   save() {
+    this.isLoading = true;
     let customer: Customer = this.createCustomer();
-
     if (this.customerService.selectedCustomer != null) {
       this.customerService.updateCustomer(customer).subscribe(
         (res => {
           console.log(res);
-          this.messageService.setMessage('success', 'Éxito', 'Cliente actualizado correctamente');
+          this.messageService.setMessage(Globals.SUCCESS_TYPE,
+             Globals.SUCCESS, Globals.CUSTOMER_UPDATED);
           this.customerService.refreshCustomers();
+          this.isLoading = false;
+          this.displayDialog = false;
         }),
         (error => console.log(error))
       );
     } else {
       this.customerService.addCustomer(customer).subscribe(
-        (res => {
-          console.log(res);
-          this.messageService.setMessage('success', 'Éxito', 'Cliente creado correctamente');
-          this.customerService.refreshCustomers();
+        ( (res : Customer) => {
+          this.customerService.selectedCustomer = customer;
+          this.router.navigate(['customerProfile', res.id]);
+          this.isLoading = false;
+          this.displayDialog = false;
+          this.customerService.showNewCustomerDialog = false;
+          this.messageService.setMessage(Globals.SUCCESS_TYPE,
+            Globals.SUCCESS, Globals.CUSTOMER_ADDED);
         }),
-        (error => this.messageService.setMessage('error', 'Error', error))
+        (error => this.messageService.setMessage(Globals.ERROR_TYPE,
+          Globals.ERROR, error))
       );
     }
-
-    this.displayDialog = false;
   }
 
   close() {

@@ -1,3 +1,5 @@
+import { Globals } from './../../../services/globals';
+import { Parent } from './../../../shared/models/parent';
 import { Customer } from './../../../shared/models/customer';
 import { Measure } from './../../../shared/models/measure';
 import { MeasureService } from './../../../services/measure.service';
@@ -11,17 +13,15 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './new-measure.component.html',
   styleUrls: ['./new-measure.component.css']
 })
-export class NewMeasureComponent implements OnInit {
+export class NewMeasureComponent extends Parent implements OnInit {
 
-  displayDialog: boolean;
-  titulo: string = "";
   measureForm: FormGroup;
-
+  displayDialog = false;
 
   constructor(public customerService: CustomerService,
     public measureService: MeasureService,
     private formBuilder: FormBuilder,
-    public messageService: MessageService) { }
+    public messageService: MessageService) { super(); }
 
   ngOnInit() {
     this.messageService.clearMessages();
@@ -55,13 +55,18 @@ export class NewMeasureComponent implements OnInit {
 
   save() {
     let measure: Measure = this.createMeasure();
+    this.isLoading = true;
     if (this.measureService.selectedMeasure != null) {
       this.measureService.updateMeasure(measure).subscribe(
         (res => {
           console.log(res);
           this.messageService.setMessage('success', 'Éxito', 'Medida actualizada correctamente');
           this.customerService.getCustomerById(this.customerService.selectedCustomer.id).subscribe(
-            (res: Customer) => this.customerService.selectedCustomer = res
+            (res: Customer) => {
+              this.displayDialog = false;
+              this.isLoading = false;
+              this.customerService.selectedCustomer = res;
+            }
           )
         }),
         (error => console.log(error))
@@ -70,16 +75,22 @@ export class NewMeasureComponent implements OnInit {
       this.measureService.addMeasure(measure).subscribe(
         (res => {
           console.log(res);
-          this.messageService.setMessage('success', 'Éxito', 'Medida creada correctamente');
+          this.messageService.setMessage(Globals.SUCCESS_TYPE, Globals.SUCCESS, Globals.MEASURE_ADDED);
           this.customerService.getCustomerById(this.customerService.selectedCustomer.id).subscribe(
-            (res: Customer) => this.customerService.selectedCustomer = res
+            (res: Customer) => {
+              this.displayDialog = false;
+              this.isLoading = false;
+              this.customerService.selectedCustomer = res;
+            }
           )
         }),
-        (error => this.messageService.setMessage('error', 'Error', error))
-      );
+        (error => {
+          this.messageService.setMessage(Globals.ERROR_TYPE, Globals.ERROR, error);
+          this.isLoading = false;
+        }
+        ));
     }
 
-    this.displayDialog = false;
   }
 
   createMeasure() {

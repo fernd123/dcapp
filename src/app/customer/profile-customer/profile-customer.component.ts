@@ -1,3 +1,4 @@
+import { Parent } from './../../shared/models/parent';
 import { Measure } from './../../shared/models/measure';
 import { MeasureService } from './../../services/measure.service';
 import { MessageService } from './../../services/message.service';
@@ -5,23 +6,25 @@ import { Customer } from './../../shared/models/customer';
 import { CustomerService } from './../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile-customer',
   templateUrl: './profile-customer.component.html',
   styleUrls: ['./profile-customer.component.css']
 })
-export class ProfileCustomerComponent implements OnInit {
+export class ProfileCustomerComponent extends Parent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     public customerService: CustomerService,
     public measureService: MeasureService,
     public messageService: MessageService,
-    private _location: Location) { }
+    private _location: Location) { super(); }
 
   ngOnInit() {
     this.messageService.clearMessages();
+    this.isLoading = true;
+    debugger;
     this.activatedRoute.params.subscribe(params => {
       let id = params['id'];
       this.customerService.getCustomerById(id).subscribe(
@@ -47,9 +50,13 @@ export class ProfileCustomerComponent implements OnInit {
               { field: 'gluteus', header: 'Glúteo (cm)' }
             ];
           }
+          this.isLoading = false;
         }),
-        (error => console.log(error))
-      );
+        (error => {
+          console.log(error);
+          this.isLoading = false;
+        }
+        ));
     });
   }
 
@@ -58,6 +65,7 @@ export class ProfileCustomerComponent implements OnInit {
   }
 
   showNewCustomer(customer: Customer = this.customerService.selectedCustomer) {
+    debugger;
     if (customer == null) {
       this.customerService.selectedCustomer = null;
     }

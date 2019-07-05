@@ -2,7 +2,8 @@
   [style]="{width: '80%'}" (onHide)="close()" [draggable]="false">
 
   <form [formGroup]="customerForm">
-    <div class="form-row">
+
+    <div class="form-row" *ngIf="isLoading == false">
       <div class="col">
         <label for="name">Nombre</label>
         <input type="text" class="form-control" id="name" formControlName="name"
@@ -73,15 +74,22 @@
         <textarea class="form-control" id="observations" formControlName="observations"></textarea>
       </div>
     </div>
-
   </form>
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button type="button" pButton class="ui-button-warning" icon="pi pi-times" (click)="close()"
         label="Cancelar"></button>
-      <button type="button" pButton icon="pi pi-save" (click)="save()" label="Save"
-      [disabled]="customerForm.invalid"></button>
+      <button type="button" pButton icon="pi pi-save" (click)="save()" label="Guardar"
+        [disabled]="customerForm.invalid"></button>
     </div>
+
+    <!-- LOADING SPINNER
+    <div *ngIf="isLoading == true">
+      <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE"
+        animationDuration=".5s">
+      </p-progressSpinner>
+    
+    </div> -->
   </p-footer>
 </p-dialog>
