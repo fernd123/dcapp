@@ -24,7 +24,6 @@ export class ProfileCustomerComponent extends Parent implements OnInit {
   ngOnInit() {
     this.messageService.clearMessages();
     this.isLoading = true;
-    debugger;
     this.activatedRoute.params.subscribe(params => {
       let id = params['id'];
       this.customerService.getCustomerById(id).subscribe(
@@ -65,7 +64,6 @@ export class ProfileCustomerComponent extends Parent implements OnInit {
   }
 
   showNewCustomer(customer: Customer = this.customerService.selectedCustomer) {
-    debugger;
     if (customer == null) {
       this.customerService.selectedCustomer = null;
     }

@@ -10,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  private uriEndPoint: string = Globals.URL_ENDPOINT_HEROKU+Globals.URL_LOGIN;
+  private uriEndPoint: string = Globals.URL_ENDPOINT_AWS+Globals.URL_LOGIN;
 
   constructor(private http: HttpClient,
     private router: Router,
