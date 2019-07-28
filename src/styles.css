@@ -7,3 +7,8 @@ label {
 .margin-bottom {
   padding-bottom: 20px;
 }
+
+.cal-day-selected,
+      .cal-day-selected:hover {
+        background-color: deeppink !important;
+      }

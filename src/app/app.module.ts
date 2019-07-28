@@ -1,3 +1,4 @@
+import { CalendarHeaderComponent } from './date/calendar-header.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -36,7 +37,6 @@ import {SidebarModule} from 'primeng/sidebar';
 import {ToolbarModule} from 'primeng/toolbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DialogModule} from 'primeng/dialog';
-import {CalendarModule} from 'primeng/calendar';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
@@ -46,11 +46,17 @@ import {TabViewModule} from 'primeng/tabview';
 import { LoginComponent } from './login/login.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AgePipe } from './age.pipe';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DateComponent } from './date/date.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
 }
+
+import { registerLocaleData } from '@angular/common';
+import localePy from '@angular/common/locales/es';
+registerLocaleData(localePy, 'es');
 
 @NgModule({
   declarations: [
@@ -64,7 +70,8 @@ export function tokenGetter() {
     NewMeasureComponent,
     LoginComponent,
     FooterComponent,
-    AgePipe
+    AgePipe,
+    DateComponent, CalendarHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +81,10 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter
       }
+    }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
     }),
     FormsModule,
     BrowserAnimationsModule,
