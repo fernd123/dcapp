@@ -20,8 +20,8 @@ export class Globals {
 
   // URL ENDPOINTS
   public static URL_ENDPOINT_LOCAL: string = 'http://localhost:8080';
-  public static URL_ENDPOINT_HEROKU: string = 'https://spring-dcnutrition.herokuapp.com';
-  public static URL_ENDPOINT_AWS: string = 'http://ec2-35-175-247-93.compute-1.amazonaws.com:8080';
+  public static URL_ENDPOINT_HEROKU: string = '';
+  public static URL_ENDPOINT_AWS: string = '';
 
   
 
