@@ -9,7 +9,7 @@ import {
   DAYS_OF_WEEK
 } from 'angular-calendar';
 import { colors } from './colors';
-import { DayViewHour } from 'calendar-utils';
+import { DayViewHour, MonthViewDay, WeekViewHourColumn } from 'calendar-utils';
 import { CalendarMonthViewDay } from 'angular-calendar';
 
 @Component({
@@ -26,6 +26,8 @@ import { CalendarMonthViewDay } from 'angular-calendar';
 })
 export class DateComponent implements OnInit {
 
+  excludeDays: number[] = [0];
+
   view: CalendarView = CalendarView.Day;
 
   viewDate = new Date();
@@ -39,6 +41,8 @@ export class DateComponent implements OnInit {
   CalendarView = CalendarView;
   selectedDays: any = [];
   dayView: DayViewHour[];
+  weekHour: WeekViewHourColumn[];
+
   selectedMonthViewDay: CalendarMonthViewDay;
   selectedDayViewDate: Date;
   setView(view: CalendarView) {
@@ -108,7 +112,6 @@ export class DateComponent implements OnInit {
 
   hourSegmentClicked(date: Date) {
     this.selectedDayViewDate = date;
-    debugger;
     this.addSelectedDayViewClass();
   }
 
@@ -121,14 +124,37 @@ export class DateComponent implements OnInit {
     this.dayView.forEach(hourSegment => {
       hourSegment.segments.forEach(segment => {
         delete segment.cssClass;
-        if (
-          this.selectedDayViewDate &&
-          segment.date.getTime() === this.selectedDayViewDate.getTime()
-        ) {
+        console.log(this.selectedDayViewDate + ' -- '+segment.date );
+        if (this.selectedDayViewDate && segment.date.getTime() === this.selectedDayViewDate.getTime()) {
           segment.cssClass = 'cal-day-selected';
+          debugger;
         }
       });
     });
+  }
+
+
+  beforeWeekViewRender(weekHour: WeekViewHourColumn[]) {
+    this.weekHour = weekHour;
+    this.addSelectedDayViewClass();
+  }
+
+  hourSegmentWeekClicked(date: Date) {
+    this.selectedDayViewDate = date;
+    this.addSelectedDayMonthViewClass();
+  }
+
+  private addSelectedDayMonthViewClass() {
+    /*this.weekHour.forEach(hourSegment => {
+      hourSegment.segme.forEach(segment => {
+        delete segment.cssClass;
+        console.log(this.selectedDayViewDate + ' -- '+segment.date );
+        if (this.selectedDayViewDate && segment.date.getTime() === this.selectedDayViewDate.getTime()) {
+          segment.cssClass = 'cal-day-selected';
+          debugger;
+        }
+      });
+    }); */
   }
 
 }
