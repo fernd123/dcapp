@@ -5,7 +5,7 @@ import { MessageService } from './../../services/message.service';
 import { Customer } from './../../shared/models/customer';
 import { CustomerService } from './../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -16,6 +16,7 @@ import { Location } from '@angular/common';
 export class ProfileCustomerComponent extends Parent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
+    private router: Router,
     public customerService: CustomerService,
     public measureService: MeasureService,
     public messageService: MessageService,
@@ -77,9 +78,13 @@ export class ProfileCustomerComponent extends Parent implements OnInit {
     this.measureService.showNewMeasureDialog = true;
   }
 
+  showCalendar() {
+    this.router.navigate(['/dates']);
+  }
+
   back() {
     this.messageService.clearMessages();
-    this._location.back();
+    this.router.navigate(['/customers']);
   }
 
 }

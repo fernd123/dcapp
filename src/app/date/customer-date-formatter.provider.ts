@@ -9,6 +9,8 @@ export class CustomDateFormatter extends CalendarDateFormatter {
   }
 
   public weekViewHour({ date, locale }: DateFormatterParams): string {
-    return this.dayViewHour({ date, locale });
-  }
+    return new Intl.DateTimeFormat('ca', {
+      hour: 'numeric',
+      minute: 'numeric'
+    }).format(date);  }
 }

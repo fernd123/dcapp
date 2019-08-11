@@ -28,6 +28,9 @@ import { CustomerService } from './services/customer.service';
 import {ConfirmationService} from 'primeng/api';
 import { MessageService } from './services/message.service';
 import { MeasureService } from './services/measure.service';
+import { CustomerDateService } from './services/customerdate.service';
+import {DropdownModule} from 'primeng/dropdown';
+
 
 
 //Ngprime
@@ -56,6 +59,7 @@ export function tokenGetter() {
 
 import { registerLocaleData } from '@angular/common';
 import localePy from '@angular/common/locales/es';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 registerLocaleData(localePy, 'es');
 
 @NgModule({
@@ -77,6 +81,7 @@ registerLocaleData(localePy, 'es');
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
@@ -94,6 +99,7 @@ registerLocaleData(localePy, 'es');
     TableModule,
     ButtonModule,
     SidebarModule,
+    DropdownModule,
     DialogModule,
     ProgressSpinnerModule,
     CalendarModule,
@@ -106,6 +112,7 @@ registerLocaleData(localePy, 'es');
   ],
   providers: [CustomerService, MeasureService, ConfirmationService,
      MessageService, MessageService, AuthGuardService, AuthService,
+     CustomerDateService, NgbActiveModal,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

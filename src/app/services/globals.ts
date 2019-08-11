@@ -28,6 +28,8 @@ export class Globals {
   public static URL_LOGIN: string = '/login';
   public static URL_CUSTOMERS: string = '/api/customers';
   public static URL_MEASURES: string = '/api/measures';
+  public static URL_DATES: string = '/api/customerdates';
+
 
 
 

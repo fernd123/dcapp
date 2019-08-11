@@ -40,6 +40,9 @@
     <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-pencil"
       (click)="showNewCustomer()" title="Editar Datos Cliente" class="ui-button-warning"></button>
     <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
+    <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-calendar"
+      (click)="showCalendar()" title="Registrar Cita" class="ui-button-secondary"></button>
+    <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
     <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-eye"
       (click)="viewCustomer()" title="Ficha Cliente" class="ui-button-success"></button>
     <i class="ui-toolbar-separator" style="vertical-align: middle"></i>

@@ -14,7 +14,7 @@ export class MeasureService {
 
   measureCols = [];
 
-  private uriEndPoint: string = Globals.URL_ENDPOINT_AWS+Globals.URL_MEASURES;
+  private uriEndPoint: string = Globals.URL_ENDPOINT_LOCAL+Globals.URL_MEASURES;
 
   constructor(private http: HttpClient,
     private customerService: CustomerService) { }

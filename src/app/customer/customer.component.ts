@@ -50,6 +50,10 @@ export class CustomerComponent extends Parent implements OnInit {
     this.customerService.showNewCustomerDialog = true;
   }
 
+  showCalendar(){
+    this.router.navigate(['dates']);
+  }
+  
   viewCustomer() {
     this.router.navigate(['customerProfile', this.customerService.selectedCustomer.id]);
   }

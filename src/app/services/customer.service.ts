@@ -12,7 +12,7 @@ export class CustomerService {
   showNewCustomerDialog: boolean = false;
   token: string = "";
 
-  private uriEndPoint: string = Globals.URL_ENDPOINT_AWS+Globals.URL_CUSTOMERS;
+  private uriEndPoint: string = Globals.URL_ENDPOINT_LOCAL+Globals.URL_CUSTOMERS;
 
   constructor(private http: HttpClient) { }
 
