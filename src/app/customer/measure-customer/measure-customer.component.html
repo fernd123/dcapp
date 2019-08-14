@@ -1,6 +1,6 @@
 <p-table [columns]="measureService.measureCols" [value]="customerService.selectedCustomer?.measures" [responsive]="true" [paginator]="true"
   [rows]="5" selectionMode="single" [(selection)]="measureService.selectedMeasure" dataKey="id"
-  (onRowSelect)="onRowSelect($event)">
+  sortField="createAt" sortOrder="-1" (onRowSelect)="onRowSelect($event)">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -26,11 +26,11 @@
 </p-table>
 
 <!-- DELETE CONFIRM DIALOG-->
-<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+<p-confirmDialog key="measureDeleteDialog" header="Confirmation" icon="pi pi-exclamation-triangle" #med>
   <p-footer>
     <button type="button" pButton icon="pi pi-times" label="No" class="ui-button-warning"
-      (click)="cd.reject()"></button>
+      (click)="med.reject()"></button>
     <button type="button" pButton icon="pi pi-check" label="Sí" class="ui-button-success"
-      (click)="cd.accept()"></button>
+      (click)="med.accept()"></button>
   </p-footer>
 </p-confirmDialog>

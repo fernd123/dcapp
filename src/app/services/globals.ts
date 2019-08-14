@@ -18,6 +18,10 @@ export class Globals {
   public static MEASURE_UPDATED = 'Medida actualizada correctamente';
   public static MEASURE_ADDED = 'Medida creada correctamente';
 
+  public static DATE_REMOVED = 'Cita eliminada correctamente';
+  public static DATE_UPDATED = 'Cita actualizada correctamente';
+  public static DATE_ADDED = 'Cita creada correctamente';
+
   // URL ENDPOINTS
   public static URL_ENDPOINT_LOCAL: string = 'http://localhost:8080';
   public static URL_ENDPOINT_HEROKU: string = 'https://spring-dcnutrition.herokuapp.com';

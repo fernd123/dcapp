@@ -1,3 +1,4 @@
+import { DateCustomerComponent } from './customer/date-customer/date-customer.component';
 import { CalendarHeaderComponent } from './date/calendar-header.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
@@ -58,9 +59,10 @@ export function tokenGetter() {
 }
 
 import { registerLocaleData } from '@angular/common';
-import localePy from '@angular/common/locales/es';
+import localeEsp from '@angular/common/locales/es';
+
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-registerLocaleData(localePy, 'es');
+registerLocaleData(localeEsp, 'es');
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ registerLocaleData(localePy, 'es');
     ProfileCustomerComponent,
     MeasureCustomerComponent,
     NewMeasureComponent,
+    DateCustomerComponent,
     LoginComponent,
     FooterComponent,
     AgePipe,

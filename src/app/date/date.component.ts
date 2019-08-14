@@ -95,6 +95,7 @@ export class DateComponent implements OnInit {
    */
   fetchEvents(): void {
     this.events$ = this.customerDateService.fetchDates();
+    debugger;
   }
 
   dayClicked({ date, events }: { date: Date; events: Array<CalendarEvent<{ film: ICustomerData }>>; }): void {
@@ -154,7 +155,6 @@ export class DateComponent implements OnInit {
       let dateN = this.createDate(this.selectedDate);
       this.customerDateService.addDate(dateN, customer).subscribe(
         (res => {
-          debugger;
           //this.loadEvents();
           //this.messageService.setMessage(Globals.SUCCESS_TYPE, Globals.SUCCESS,'Cita Registrada con éxito');
           this.refresh.next();

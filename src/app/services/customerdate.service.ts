@@ -15,7 +15,7 @@ export class CustomerDateService {
   selectedDate: CustomerDate;
   showNewMeasureDialog: boolean = false;
 
-  measureCols = [];
+  customerDateCols = [];
 
   private uriEndPoint: string = Globals.URL_ENDPOINT_LOCAL + Globals.URL_DATES;
 
@@ -26,18 +26,21 @@ export class CustomerDateService {
     return this.http.get<any[]>("http://localhost:8080/api/customerdates")
       .pipe(map(res => {
         return res.map(event => {
-          return {
-            id: event.id,
-            customer: event.customer,
-            title: `${event.customer.name} ${event.customer.lastname}`,
-            start: addHours(new Date(event.start), -2),
-            end: addHours(new Date(event.end), -2),
+          debugger;
+          let eventObj = {
+            id: event[0],
+            customer: event[1],
+            title: event[1] != undefined ?
+            `${event[2]} ${event[3]}` : 'Cita',
+            start:  addHours(new Date(event[4]), -2),
+            end: addHours(new Date(event[5]), -2),
             color: { primary: event.color, secondary: "#D1E8FF" },
             draggable: true,
             meta: {
               event
             }
           };
+          return eventObj;
         });
       }));
   }
@@ -45,11 +48,11 @@ export class CustomerDateService {
     return this.http.get<CustomerDate>(this.uriEndPoint);
   }
 
-  getDateById(id: number) {
+  getDateById(id: string) {
     return this.http.get(this.uriEndPoint + `/${id}`);
   }
 
-  getDatesByCustomer(id: number) {
+  getDatesByCustomer(id: string) {
     return this.http.get(this.uriEndPoint + `/${id}`);
   }
 

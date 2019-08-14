@@ -54,13 +54,16 @@ export class MeasureCustomerComponent extends Parent implements OnInit {
   }
 
   deleteMeasure(id: number) {
+    debugger;
     this.measureService.getMeasureById(id).subscribe(
       (res: Measure) => {
         this.measureService.selectedMeasure = res;
       });
 
+    
     this.confirmationService.confirm({
       header: Globals.CONFIRMATION,
+      key: 'measureDeleteDialog',
       message: `¿Estás seguro que deseas borrar la medida del cliente <b>${this.customerService.selectedCustomer.name} ${this.customerService.selectedCustomer.lastname}</b>?`,
       accept: () => {
         this.measureService.deleteMeasure(this.measureService.selectedMeasure).subscribe(
@@ -75,5 +78,6 @@ export class MeasureCustomerComponent extends Parent implements OnInit {
         );
       }
     });
+    
   }
 }

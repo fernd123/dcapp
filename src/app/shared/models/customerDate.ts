@@ -1,7 +1,8 @@
 import { Customer } from './customer';
 
 export class CustomerDate {
-    id: number;
+    id: string;
+    date: Date;
     start: Date;
     end: Date;
     customer: Customer;

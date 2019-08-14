@@ -16,3 +16,14 @@ label {
   color: white;
   font-size: 30px;
 }
+
+
+.ui-button.pink-button {
+  background-color: rgb(168, 59, 231);
+  border: rgb(168, 59, 231);
+}
+
+.ui-button.pink-button:hover:enabled{
+  background-color: rgb(148, 47, 151);
+  border: rgb(234, 71, 240);
+}
