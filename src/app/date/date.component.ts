@@ -83,7 +83,7 @@ export class DateComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private customerDateService: CustomerDateService,
-    private customerService: CustomerService,
+    public customerService: CustomerService,
     private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {

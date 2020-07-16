@@ -13,4 +13,5 @@ export class Customer {
 
     measures: any[];
     dates: any[];
+    customerDates: any[];
 }
