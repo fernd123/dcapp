@@ -1,3 +1,5 @@
+import { FileService } from './services/file.service';
+import { FileCustomerComponent } from './customer/file-customer/file-customer.component';
 import { DateCustomerComponent } from './customer/date-customer/date-customer.component';
 import { CalendarHeaderComponent } from './date/calendar-header.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -48,11 +50,13 @@ import {MessageModule} from 'primeng/message';
 import {PanelModule} from 'primeng/panel';
 import {TabViewModule} from 'primeng/tabview';
 import { LoginComponent } from './login/login.component';
+import {CheckboxModule} from 'primeng/checkbox';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AgePipe } from './age.pipe';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DateComponent } from './date/date.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -78,6 +82,7 @@ registerLocaleData(localeEsp, 'es');
     LoginComponent,
     FooterComponent,
     AgePipe,
+    FileCustomerComponent,
     DateComponent, CalendarHeaderComponent
   ],
   imports: [
@@ -85,6 +90,7 @@ registerLocaleData(localeEsp, 'es');
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
@@ -104,6 +110,7 @@ registerLocaleData(localeEsp, 'es');
     SidebarModule,
     DropdownModule,
     DialogModule,
+    CheckboxModule,
     ProgressSpinnerModule,
     CalendarModule,
     ConfirmDialogModule,
@@ -115,7 +122,7 @@ registerLocaleData(localeEsp, 'es');
   ],
   providers: [CustomerService, MeasureService, ConfirmationService,
      MessageService, MessageService, AuthGuardService, AuthService,
-     CustomerDateService, NgbActiveModal,
+     CustomerDateService, NgbActiveModal, FileService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

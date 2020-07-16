@@ -17,6 +17,7 @@ export class NewMeasureComponent extends Parent implements OnInit {
 
   measureForm: FormGroup;
   displayDialog = false;
+  showFrecuency = false;
 
   constructor(public customerService: CustomerService,
     public measureService: MeasureService,
@@ -107,4 +108,7 @@ export class NewMeasureComponent extends Parent implements OnInit {
     return measure;
   }
 
+  setFrecuency(){
+    this.showFrecuency = !this.showFrecuency;
+  }
 }

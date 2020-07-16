@@ -1,0 +1,19 @@
+<p-dialog header="{{titulo}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: '80%'}" (onHide)="close()" [draggable]="false">
+
+  <input #fileInput type="file" ng2FileSelect [uploader]="uploader" />
+
+  <div class="drop-box" ng2FileDrop [ngClass]="{'dragover': isDropOver}" [uploader]="uploader"
+    (fileOver)="fileOverAnother($event)" (click)="fileClicked()">
+    <span class="drag-in-title">Importa un Fichero o Arrastra un Fichero</span>
+    <span class="drag-over-title">Suelta el fichero</span>
+  </div>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton class="ui-button-warning" icon="pi pi-times" (click)="close()"
+        label="Cancelar"></button>
+    </div>
+
+  </p-footer>
+</p-dialog>

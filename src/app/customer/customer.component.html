@@ -35,19 +35,19 @@
 <!--CUSTOMER TOOLBAR-->
 <p-toolbar>
   <div class="ui-toolbar-group-right">
-    <button pButton type="button" icon="pi pi-plus" (click)="showNewCustomer(null)" title="Nuevo Cliente" label="Nuevo Cliente"></button>
+    <button pButton type="button" icon="pi pi-plus" (click)="showNewCustomer(null)" title="Nuevo" label="Nuevo"></button>
     <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
     <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-pencil"
-      (click)="showNewCustomer()" title="Editar Datos Cliente" label="Editar Cliente" class="ui-button-warning"></button>
+      (click)="showNewCustomer()" title="Editar Datos Cliente" label="Editar" class="ui-button-warning"></button>
     <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
     <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-calendar"
       (click)="showCalendar()" title="Registrar Cita" label="Registrar Cita" class="pink-button"></button>
     <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
     <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-eye"
-      (click)="viewCustomer()" title="Ficha Cliente" label="Ficha Cliente" class="ui-button-success"></button>
+      (click)="viewCustomer()" title="Ficha Cliente" label="Ficha" class="ui-button-success"></button>
     <i class="ui-toolbar-separator" style="vertical-align: middle"></i>
     <button [disabled]="customerService.selectedCustomer == null" pButton type="button" icon="pi pi-trash"
-      (click)="deleteCustomer()" title="Eliminar Cliente" label="Borrar Cliente" class="ui-button-danger"></button>
+      (click)="deleteCustomer()" title="Eliminar Cliente" label="Borrar" class="ui-button-danger"></button>
   </div>
 </p-toolbar>
 

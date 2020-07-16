@@ -49,13 +49,13 @@
         (click)="showNewMeasure(null)"></button>
       <button pButton type="button" class="btn btn-primary btn-block" label="Nueva Cita" icon="pi pi-calendar"
         (click)="showCalendar()"></button>
-      <!--<button pButton type="button" class="btn btn-primary btn-block" label="Adjuntar Entrenamiento"
-        icon="pi pi-bookmark"></button>
+      <button pButton type="button" class="btn btn-primary btn-block" label="Adjuntar Entrenamiento"
+        icon="pi pi-upload" (click)="showCustomerFile('T')"></button>
       <button pButton type="button" class="btn btn-primary btn-block" label="Adjuntar Dieta"
-        icon="pi pi-upload"></button>
-      <button pButton type="button" class="btn btn-primary btn-block" label="Nueva Cita" icon="pi pi-calendar"></button>
-      -->
+        icon="pi pi-upload" (click)="showCustomerFile('D')"></button>
+
     </div>
+
   </div>
 </div>
 
@@ -69,6 +69,11 @@
   <app-new-measure></app-new-measure>
 </div>
 
+<!-- ADD A FILE TRAINING/DIET-->
+<div *ngIf="fileService.showFileCustomerDialog">
+  <app-file-customer></app-file-customer>
+</div>
+
 
 <!--TABS-->
 <p-tabView (onChange)="onTabChange($event)">
@@ -76,7 +81,7 @@
     <app-measure-customer></app-measure-customer>
   </p-tabPanel>
   <p-tabPanel header="Citas">
-      <app-date-customer></app-date-customer>
+    <app-date-customer></app-date-customer>
   </p-tabPanel>
   <!--
   <p-tabPanel header="Dietas">

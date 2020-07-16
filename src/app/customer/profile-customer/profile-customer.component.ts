@@ -1,12 +1,15 @@
+import { FileService } from './../../services/file.service';
 import { Parent } from './../../shared/models/parent';
 import { Measure } from './../../shared/models/measure';
 import { MeasureService } from './../../services/measure.service';
 import { MessageService } from './../../services/message.service';
 import { Customer } from './../../shared/models/customer';
 import { CustomerService } from './../../services/customer.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { FileUploader } from 'ng2-file-upload';
+import { Globals } from 'src/app/services/globals';
 
 @Component({
   selector: 'app-profile-customer',
@@ -19,10 +22,12 @@ export class ProfileCustomerComponent extends Parent implements OnInit {
     private router: Router,
     public customerService: CustomerService,
     public measureService: MeasureService,
+    public fileService: FileService,
     public messageService: MessageService,
     private _location: Location) { super(); }
 
   ngOnInit() {
+
     this.messageService.clearMessages();
     this.isLoading = true;
     this.activatedRoute.params.subscribe(params => {
@@ -76,6 +81,11 @@ export class ProfileCustomerComponent extends Parent implements OnInit {
       this.measureService.selectedMeasure = null;
     }
     this.measureService.showNewMeasureDialog = true;
+  }
+
+  showCustomerFile(type: string) { //T = Training D= Diet
+    this.fileService.type = type;
+    this.fileService.showFileCustomerDialog = true;
   }
 
   showCalendar() {

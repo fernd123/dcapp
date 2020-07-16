@@ -22,9 +22,12 @@ export class Globals {
   public static DATE_UPDATED = 'Cita actualizada correctamente';
   public static DATE_ADDED = 'Cita creada correctamente';
 
+
+  public static FILE_SUCCESS = 'Fichero Subido con éxito';
+
   // URL ENDPOINTS
-  public static URL_ENDPOINT_LOCAL: string = 'http://localhost:8080';
-  public static URL_ENDPOINT_HEROKU: string = 'https://spring-dcnutrition.herokuapp.com';
+  public static URL_ENDPOINT_HEROKU: string = 'http://localhost:8080';
+  public static URL_ENDPOINT_LOCAL: string = 'https://spring-dcnutrition.herokuapp.com';
   public static URL_ENDPOINT_AWS: string = 'http://ec2-35-175-247-93.compute-1.amazonaws.com:8080';
 
   
@@ -33,6 +36,8 @@ export class Globals {
   public static URL_CUSTOMERS: string = '/api/customers';
   public static URL_MEASURES: string = '/api/measures';
   public static URL_DATES: string = '/api/customerdates';
+  public static URL_FILE: string = '/api/files';
+
 
 
 

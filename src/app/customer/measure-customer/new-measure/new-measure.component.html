@@ -50,7 +50,17 @@
       </div>
     </div>
 
+
     <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <p-checkbox name="groupname" value="cyclist" label="Registrar Frecuencias Cardiacas" (click)="setFrecuency()"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row" *ngIf="showFrecuency == true">
       <div class="col">
         <div class="form-group">
           <label for="maxFrecueny">Frecuencia Máxima</label>
