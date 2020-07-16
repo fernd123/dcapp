@@ -23,7 +23,7 @@ export class CustomerDateService {
     private customerService: CustomerService) { }
 
   fetchDates(){
-    return this.http.get<any[]>("http://localhost:8080/api/customerdates")
+    return this.http.get<any[]>(Globals.URL_ENDPOINT_LOCAL+"/api/customerdates")
       .pipe(map(res => {
         return res.map(event => {
           debugger;
